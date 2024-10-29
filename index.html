@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Centered</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 비밀번호 입력창 스타일 */
+        .password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .password-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .password-box input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .password-box button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="password-overlay" id="passwordOverlay">
+    <div class="password-box">
+        <p>비밀번호를 입력하세요:</p>
+        <input type="password" id="passwordInput" placeholder="비밀번호">
+        <button onclick="checkPassword()">확인</button>
+        <p id="errorMessage" style="color: red; display: none;">비밀번호가 틀렸습니다. 다시 시도하세요.</p>
+    </div>
+</div>
+
+<div class="centered" id="content" style="display: none;">
+    <img src="sheer.JPG" alt="sheer" id="image">
+    <audio id="audio" src="news.mp3" autoplay loop></audio>
+</div>
+
+<script>
+    const passwordOverlay = document.getElementById('passwordOverlay');
+    const content = document.getElementById('content');
+    const passwordInput = document.getElementById('passwordInput');
+    const errorMessage = document.getElementById('errorMessage');
+
+    function checkPassword() {
+        const password = passwordInput.value;
+        if (password === "1753") {
+            passwordOverlay.style.display = "none";
+            content.style.display = "block";
+        } else {
+            errorMessage.style.display = "block";
+        }
+    }
+
+    const audio = document.getElementById('audio');
+    const image = document.getElementById('image');
+
+    // 이미지 클릭 시 재생/일시정지 토글
+    image.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+    });
+</script>
+
+</body>
+</html>
